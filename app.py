@@ -1,4 +1,5 @@
 from flask import Flask, render_template, redirect, request
+import random
 from models import db, User, Task
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 
@@ -29,16 +30,31 @@ def register():
 def home():
     return redirect('/login')
 
-# Login
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    error = None
+    affirmations = [
+        "You are doing amazing 💖",
+        "Small steps still count 🌸",
+        "You glow differently when you're calm ✨",
+        "You’ve got this 💪💗",
+        "Progress over perfection 🌷",
+        "You are becoming your best self 🌼",
+        "Be proud of how far you’ve come 💕"
+    ]
+
+    random_affirmation = random.choice(affirmations)
+
     if request.method == 'POST':
         user = User.query.filter_by(username=request.form['username']).first()
+
         if user and user.password == request.form['password']:
             login_user(user)
             return redirect('/dashboard')
-    return render_template('login.html')
+        else:
+            error = "Invalid username or password 💔"
 
+    return render_template('login.html', error=error, affirmation=random_affirmation)
 # Dashboard
 @app.route('/dashboard', methods=['GET', 'POST'])
 @login_required
