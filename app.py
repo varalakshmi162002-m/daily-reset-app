@@ -25,6 +25,10 @@ def register():
         return redirect('/login')
     return render_template('register.html')
 
+@app.route('/')
+def home():
+    return redirect('/login')
+
 # Login
 @app.route('/login', methods=['GET', 'POST'])
 def login():
