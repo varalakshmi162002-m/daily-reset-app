@@ -1,0 +1,28 @@
+<h2>🌿 My Daily Reset</h2>
+
+<form method="POST">
+  <label>
+    <input type="checkbox" name="water" {% if task.water %}checked{% endif %}>
+    💧 Water
+  </label><br><br>
+
+  <label>
+    <input type="checkbox" name="workout" {% if task.workout %}checked{% endif %}>
+    🏋️ Workout
+  </label><br><br>
+
+  <label>
+    <input type="checkbox" name="steps" {% if task.steps %}checked{% endif %}>
+    🚶 Steps
+  </label><br><br>
+
+  <label>
+    <input type="checkbox" name="journal" {% if task.journal %}checked{% endif %}>
+    📓 Journal
+  </label><br><br>
+
+  <button type="submit">Save</button>
+</form>
+
+<br>
+<a href="/logout">Logout</a>
